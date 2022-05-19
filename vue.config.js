@@ -1,7 +1,7 @@
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const publicPath =
-  process.env.NODE_ENV === "production" ? "/dashboard-of/" : "/";
+  process.env.NODE_ENV === "production" ? "/" : "/";
 
 module.exports = {
       

@@ -22,7 +22,7 @@
 import { createDbWorker } from "sql.js-httpvfs";
 
 const publicPath =
-  process.env.NODE_ENV === "production" ? "/" : "/";
+  process.env.NODE_ENV === "production" ? "/dashboard-of/" : "/";
 
 const workerUrl = new URL(
   `${publicPath}sql.js-httpvfs/sqlite.worker.js`,
@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     searchText(){
-      this.runSql("SELECT * FROM mytable limit 10")
+      this.runSql("SELECT * FROM mytable WHERE denomination LIKE '%" + this.search + "%' limit 10")
     },
     async runSql(sql) {
       this.result = await this.worker.db.query(sql);

@@ -76,7 +76,7 @@ export default {
     },
     goto(id){
       console.log('jj');
-      this.$router.push('test?id='+id);
+      this.$router.push('/organisme/'+id);
     }
   },
   watch:{

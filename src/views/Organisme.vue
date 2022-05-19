@@ -28,7 +28,7 @@ const wasmUrl = new URL(
 );
 
 export default {
-  name: 'Test',
+  name: 'Organisme',
   mixins: [],
   components:{
   },
@@ -58,7 +58,7 @@ export default {
       workerUrl.toString(),
       wasmUrl.toString()
     );
-    this.id = this.$route.query.id
+    this.id = this.$route.params.id
     this.searchText();
   },
   methods: {

@@ -68,7 +68,8 @@ export default {
   },
   methods: {
     searchText(){
-      this.runSql("SELECT * FROM mytable WHERE denomination LIKE '%" + this.search + "%' limit 10")
+      //this.runSql("SELECT * FROM list_of WHERE denomination LIKE '" + this.search + "%' limit 10")
+      this.runSql("SELECT * FROM search WHERE search MATCH '" + this.search + "' LIMIT 10")
     },
     async runSql(sql) {
       this.result = await this.worker.db.query(sql);
@@ -78,8 +79,6 @@ export default {
   },
   created(){
   },
-
-
 }
 </script>
 

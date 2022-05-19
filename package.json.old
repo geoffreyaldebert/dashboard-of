@@ -12,6 +12,9 @@
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {
+    "d3": "7.4.4",
+    "d3-node": "^2.2.3",
+    "http-server": "^14.1.0",
     "sass": "^1.32.5",
     "sass-loader": "^10.1.1",
     "serve-static": "^1.14.2",

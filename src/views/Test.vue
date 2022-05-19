@@ -1,7 +1,11 @@
 <template>
   <div class="homepage">
-      Coucou
-      <pre>{{ JSON.stringify(result, null, 2) }}</pre>
+      To
+      {{ result }}
+      <div v-bind:key="res.numeroDeclarationActivite" v-for="res in result">
+        {{ res }}
+        <br />
+      </div>
   </div>
 </template>
 
@@ -43,7 +47,7 @@ export default {
           from: "inline",
           config: {
             serverMode: "full",
-            url: `${publicPath}db/of.db`,
+            url: `${publicPath}db/of.sqlite`,
             requestChunkSize: 4096,
           },
         },
@@ -56,7 +60,7 @@ export default {
   },
   methods: {
     searchText(){
-      this.runSql("SELECT * FROM mytable WHERE denomination LIKE '%"+this.search+"%' LIMIT 20")
+      this.runSql("SELECT * FROM complete WHERE siretEtablissementDeclarant = '40100010400034' LIMIT 1")
     },
     async runSql(sql) {
       this.result = await this.worker.db.query(sql);

@@ -1,9 +1,12 @@
 <template>
   <div class="homepage">
-      To
-      {{ result }}
+      Résultat
+      <br />
       <div v-bind:key="res.numeroDeclarationActivite" v-for="res in result">
-        {{ res }}
+        {{ res.denomination }}
+        <br />
+        <br />
+        <pre>{{ res }}</pre>
         <br />
       </div>
   </div>
@@ -32,8 +35,8 @@ export default {
   data(){
     return {
       result: undefined,
-      search: '',
-      columns: ['denomination','siren','']
+      columns: ['denomination','siren',''],
+      id: ''
     }
   },
   props: {
@@ -55,12 +58,12 @@ export default {
       workerUrl.toString(),
       wasmUrl.toString()
     );
-    this.search = 'world'
+    this.id = this.$route.query.id
     this.searchText();
   },
   methods: {
     searchText(){
-      this.runSql("SELECT * FROM complete WHERE siretEtablissementDeclarant = '40100010400034' LIMIT 1")
+      this.runSql("SELECT * FROM complete WHERE numeroDeclarationActivite = '" + this.id + "' LIMIT 1")
     },
     async runSql(sql) {
       this.result = await this.worker.db.query(sql);

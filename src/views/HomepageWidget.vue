@@ -1,20 +1,20 @@
 <template>
   <div class="homepage">
-    coucou
     <h1>L'annuaire des Organismes de Formation</h1>
-    <h2>Retrouvez toutes les informations publiques concernant les organismes français</h2>
+    <h2>Retrouvez toutes les informations publiques concernant les organismes de formation français</h2>
     <div class="search-wrapper">
       <input type="text" v-model="search" placeholder="Search title.." v-on:keyup.enter="searchText()"/>
-      <button @click="searchText()">Rechercher</button>
+      <button @click="searchText()">Rechercher un organisme de formation</button>
     </div>
     <div v-if="result">{{ result.length}} résultats</div>
+    <br />
     <div>
       <div v-bind:key="res.numeroDeclarationActivite" v-for="res in result">
-        {{ res.denomination}}
+        <a href="" @click="goto(res.id) ">{{ res.denomination}}</a>
+        <br />
         <br />
       </div>
     </div>
-    <pre>{{ result }}</pre>
   </div>
 </template>
 
@@ -69,11 +69,15 @@ export default {
   methods: {
     searchText(){
       //this.runSql("SELECT * FROM list_of WHERE denomination LIKE '" + this.search + "%' limit 10")
-      this.runSql("SELECT * FROM search WHERE search MATCH '" + this.search + "' LIMIT 10")
+      this.runSql("SELECT * FROM search WHERE search MATCH '" + this.search + "*'")
     },
     async runSql(sql) {
       this.result = await this.worker.db.query(sql);
     },
+    goto(id){
+      console.log('jj');
+      this.$router.push('test?id='+id);
+    }
   },
   watch:{
   },

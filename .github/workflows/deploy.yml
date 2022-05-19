@@ -23,7 +23,6 @@ jobs:
         run: |
           cd dist
           echo "formation.datatouilleur.fr" > CNAME
-          cp index.html 404.html
       - name: deploy
         uses: s0/git-publish-subdir-action@develop
         env:

@@ -6,7 +6,7 @@ import Organisme from './views/Organisme.vue';
 Vue.use(Router);
 
 export default new Router({
-  //mode: 'history',
+  mode: 'history',
   base: '/',
   routes: [
     {

@@ -69,14 +69,13 @@ export default {
   methods: {
     searchText(){
       //this.runSql("SELECT * FROM list_of WHERE denomination LIKE '" + this.search + "%' limit 10")
-      this.runSql("SELECT * FROM search WHERE search MATCH '" + this.search + "*'")
+      this.runSql("SELECT * FROM search WHERE search MATCH '" + this.search + "*' LIMIT 10")
     },
     async runSql(sql) {
       this.result = await this.worker.db.query(sql);
     },
     goto(id){
-      console.log('jj');
-      this.$router.push('/organisme/'+id);
+      this.$router.push('organisme/'+id);
     }
   },
   watch:{

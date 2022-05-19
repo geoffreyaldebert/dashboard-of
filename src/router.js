@@ -8,7 +8,7 @@ Vue.use(Router);
 
 export default new Router({
   mode: 'history',
-  base: 'https://geoffreyaldebert.github.io/dashboard-of/',
+  base: '/dashboard-of/',
   routes: [
     {
       path: '/',

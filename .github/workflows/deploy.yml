@@ -18,6 +18,8 @@ jobs:
       - name: Install packages and build app
         run: |
           npm install
+      - name: install sqlite
+        run: apt-get -q update && apt-get -q install -y libsqlite3-dev
       - name: get data and convert to sqlite
         run: |
           apt-get install sqlite cd preprocessing && ./preprocess.sh && cd ..

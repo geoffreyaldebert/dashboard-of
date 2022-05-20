@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import HomepageWidget from './views/HomepageWidget.vue';
+import Search from './views/Search.vue';
 import Organisme from './views/Organisme.vue';
+import Home from './views/Home.vue';
 
 Vue.use(Router);
 
@@ -12,7 +13,17 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: HomepageWidget,
+      component: Home,
+    },
+    {
+      path: '/recherche/:search/page/:page',
+      name: 'detail-search',
+      component: Search,
+    },
+    {
+      path: '/recherche/:search',
+      name: 'search',
+      component: Search,
     },
     {
       path: '/organisme/:id',

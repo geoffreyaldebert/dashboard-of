@@ -12,8 +12,9 @@
     ></head-search>
     <div class="resultPage">
       <div class="results">
-        <div>{{ countResult }} résultats trouvés pour <b><i>{{ lastSearch }}</i></b>. </div>
+        <div v-if="!showWheel" >{{ countResult }} résultats trouvés pour <b><i>{{ lastSearch }}</i></b>. </div>
         <br />
+        <div v-if="showWheel"><img src="../static/images/S2Ra.gif" width="250" /></div>
         <div class="nextprevious">
           <div v-if="this.countResult" class="actual-page">Page {{ this.page }}</div>
           <div v-if="this.page >= 2" @click="previouspage()" class="page-precedente">Page précédente</div>
@@ -55,6 +56,7 @@ export default {
       maxpage: 0,
       page: 1,
       boxvisibility: true,
+      showWheel: true,
       columns: ['denomination','siren','']
     }
   },
@@ -71,6 +73,7 @@ export default {
     },
     resultEvent(res){
       this.result = res;
+      this.showWheel = false;
     },
     pageEvent(res){
       this.page = res;

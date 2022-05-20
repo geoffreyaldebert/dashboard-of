@@ -1,5 +1,2 @@
-pandas
-numpy
-json
-os
-tqdm
+pandas==1.3.3
+tqdm==4.62.3

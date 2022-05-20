@@ -5,6 +5,8 @@
         v-on:result="resultEvent"
         ref="headsearch"
       ></head-search>
+
+      <div v-if="showWheel"><br >/<img src="../static/images/S2Ra.gif" width="250" /></div>
       <div class="organismeDetail" v-bind:key="res.numeroDeclarationActivite" v-for="res in result">
         <div class="nomOrganisme">{{ res.denomination.toLowerCase().split(' ').map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join(' ') }}</div>
         <br />
@@ -145,7 +147,7 @@
           </div>
           <br/>
           <div class="button-ae-div">
-            <div @click="gotoae(res.siren)" class="button-ae">Plus d'informations sur l'entreprise sur le site Annuaire des Entreprises</div>
+            <div @click="gotoae(res.siren)" class="button-ae">Plus d'informations sur le site<br />Annuaire des Entreprises</div>
           </div>
         </div>
         <br />
@@ -165,7 +167,8 @@ export default {
   data(){
     return {
       result: undefined,
-      id: ''
+      id: '',
+      showWheel: true
     }
   },
   props: {
@@ -180,15 +183,10 @@ export default {
     },
     resultEvent(res){
       this.result = res;
+      this.showWheel = false;
     },
     gotoae(siren){
       window.location.href = 'https://annuaire-entreprises.data.gouv.fr/entreprise/'+siren
-    },
-    searchText(){
-      this.runSql("SELECT * FROM complete WHERE numeroDeclarationActivite = '" + this.id + "' LIMIT 1")
-    },
-    async runSql(sql) {
-      this.result = await this.worker.db.query(sql);
     },
   },
   watch:{
@@ -203,6 +201,23 @@ export default {
 <style scoped lang="scss">
 
 @import "../../css/custom.css";
+
+
+@media screen and (max-width: 1100px) {
+
+}
+
+@media screen and (min-width: 1100px) {
+  .boxProperties{
+    display: flex;
+  }
+  .nameproperty{
+    width: 45%;
+  }
+  .property{
+    width: 45%;    
+  }
+}
 
 .organismeDetail{
   margin: auto;
@@ -236,12 +251,10 @@ export default {
 .boxProperties{
   margin-top: 5px;
   padding-left: 10px;
-  display: flex;
   width: 100%;
 }
 
 .nameproperty{
-  width: 45%;
   padding-top: 5px;
   padding-bottom: 5px;
   font-weight: bold;
@@ -250,7 +263,6 @@ export default {
 }
 
 .property{
-  width: 45%;
   padding-top: 5px;
   padding-bottom: 5px;
   cursor: pointer;
@@ -278,7 +290,7 @@ export default {
   margin: auto;
   padding: 5px;
   padding-left: 10px;
-  width: 350px;
+  width: 250px;
   background-color: #365E7C;
   border-radius: 5px;;
   color: white;

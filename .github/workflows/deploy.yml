@@ -1,8 +1,4 @@
-name: Deploy to Github pages
-on:
-  push:
-    branches:
-      - master
+version: 2
 
 jobs:
   deploy:
@@ -40,3 +36,23 @@ jobs:
           BRANCH: gh-pages
           FOLDER: dist
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              ignore:
+                - gh-pages
+  cron_fetch:
+    triggers:
+      - schedule:
+          cron: "0 22 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - deploy

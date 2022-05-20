@@ -1,6 +1,10 @@
 <template>
   <div class="homepage">
-      <head-search></head-search>
+      <head-search
+        v-on:search="searchEvent"
+        v-on:result="resultEvent"
+        ref="headsearch"
+      ></head-search>
       <div class="organismeDetail" v-bind:key="res.numeroDeclarationActivite" v-for="res in result">
         <div class="nomOrganisme">{{ res.denomination.toLowerCase().split(' ').map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join(' ') }}</div>
         <br />
@@ -150,20 +154,7 @@
 </template>
 
 <script>
-import { createDbWorker } from "sql.js-httpvfs";
 import HeadSearch from '../components/HeadSearch.vue';
-
-const publicPath =
-  process.env.NODE_ENV === "production" ? "/" : "/";
-
-const workerUrl = new URL(
-  `${publicPath}sql.js-httpvfs/sqlite.worker.js`,
-  import.meta.url
-);
-const wasmUrl = new URL(
-  `${publicPath}sql.js-httpvfs/sql-wasm.wasm`,
-  import.meta.url
-);
 
 export default {
   name: 'Organisme',
@@ -174,7 +165,6 @@ export default {
   data(){
     return {
       result: undefined,
-      columns: ['denomination','siren',''],
       id: ''
     }
   },
@@ -183,24 +173,14 @@ export default {
   computed: {
   },
   async mounted() {
-    this.worker = await createDbWorker(
-      [
-        {
-          from: "inline",
-          config: {
-            serverMode: "full",
-            url: `${publicPath}db/of.sqlite`,
-            requestChunkSize: 4096,
-          },
-        },
-      ],
-      workerUrl.toString(),
-      wasmUrl.toString()
-    );
-    this.id = this.$route.params.id
-    this.searchText();
   },
   methods: {
+    searchEvent(res){
+      this.search = res;
+    },
+    resultEvent(res){
+      this.result = res;
+    },
     gotoae(siren){
       window.location.href = 'https://annuaire-entreprises.data.gouv.fr/entreprise/'+siren
     },

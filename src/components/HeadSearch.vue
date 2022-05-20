@@ -57,6 +57,7 @@ export default {
       countResult: 0,
       maxpage: 0,
       page: 1,
+      id: '',
       columns: ['denomination','siren','']
     }
   },
@@ -79,20 +80,27 @@ export default {
       workerUrl.toString(),
       wasmUrl.toString()
     );
-    this.search = this.$route.params.search
-    this.lastSearch = this.search
-    this.$emit('lastsearch', this.lastSearch)
-    console.log(this.search)
-    if(this.$route.params.page){
-      this.page = this.$route.params.page
-      this.$emit('page', this.page)
+    if(this.$route.params.search){
+      this.search = this.$route.params.search
+      this.lastSearch = this.search
+      this.$emit('lastsearch', this.lastSearch)
+      console.log(this.search)
+      if(this.$route.params.page){
+        this.page = this.$route.params.page
+        this.$emit('page', this.page)
+      }
+      //this.searchText();
+      this.runSql();
     }
-    //this.searchText();
-    this.runSql();
+    if(this.$route.params.id){
+      this.id = this.$route.params.id;
+      this.searchId();
+    }
   },
   methods: {
-    searchNewPage(url){
-
+    async searchId(){
+      this.result = await this.worker.db.query("SELECT * FROM complete WHERE numeroDeclarationActivite = '" + this.id + "' LIMIT 1");
+      this.$emit('result', this.result)
     },
     searchText(){
       this.$router.push('/recherche/'+this.search+'/page/1').catch(() => {});

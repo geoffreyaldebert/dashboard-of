@@ -22,7 +22,7 @@ jobs:
         run: sudo apt-get -q update && sudo apt-get -q install -y libsqlite3-dev
       - name: get data and convert to sqlite
         run: |
-          apt-get install sqlite cd preprocessing && ./preprocess.sh && cd ..
+          cd preprocessing && sudo ./preprocess.sh && cd ..
       - name: build app
         run: |
           npm run build

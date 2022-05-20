@@ -19,6 +19,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
+      - name: create python env
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.8'
       - name: Install packages and build app
         run: |
           npm install

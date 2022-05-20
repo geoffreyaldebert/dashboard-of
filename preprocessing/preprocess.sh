@@ -1,5 +1,5 @@
-#https://www.data.gouv.fr/fr/datasets/r/ac59a0f5-fa83-4b82-bf12-3c5806d4f19f
-#mv ac59a0f5-fa83-4b82-bf12-3c5806d4f19f data.csv
+https://www.data.gouv.fr/fr/datasets/r/ac59a0f5-fa83-4b82-bf12-3c5806d4f19f
+mv ac59a0f5-fa83-4b82-bf12-3c5806d4f19f data.csv
 rm of.sqlite
 sqlite3 of.sqlite <<'END_SQL'
 .separator ";"

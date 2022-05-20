@@ -19,10 +19,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
-      - name: create python env
-        uses: actions/setup-python@v3
-        with:
-          python-version: '3.8'
+      # - name: create python env
+      #   uses: actions/setup-python@v3
+      #   with:
+      #     python-version: '3.8'
       - name: Install packages and build app
         run: |
           npm install
@@ -34,9 +34,12 @@ jobs:
       - name: get data and convert to sqlite
         run: |
           cd preprocessing && sudo ./preprocess.sh && cd ..
-      - name: create siren folder
+      # - name: create siren folder
+      #   run: |
+      #     cd preprocessing && pip install -r requirements.txt && python ./generateAPI.py && cd ..
+      - name: move siren folder to build site
         run: |
-          cd preprocessing && pip install -r requirements.txt && python ./generateAPI.py && mv siren ../dist/siren && cd ..
+          cd preprocessing && mv siren ../dist/siren && cd ..
       - name: Page 404
         run: |
           cp 404.html dist/404.html

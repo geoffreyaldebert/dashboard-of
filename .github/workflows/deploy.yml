@@ -15,6 +15,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
+      - name: get data and convert to sqlite
+        run: |
+          cd preprocessing && ./preprocess.sh && cd ..
       - name: Install packages and build app
         run: |
           npm install

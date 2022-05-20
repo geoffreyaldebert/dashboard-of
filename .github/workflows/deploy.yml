@@ -22,14 +22,17 @@ jobs:
       - name: Install packages and build app
         run: |
           npm install
+      - name: build app
+        run: |
+          npm run build
       - name: install sqlite
         run: sudo apt-get -q update && sudo apt-get -q install -y libsqlite3-dev
       - name: get data and convert to sqlite
         run: |
           cd preprocessing && sudo ./preprocess.sh && cd ..
-      - name: build app
+      - name: create siren folder
         run: |
-          npm run build
+          cd preprocessing && pip install -r requirements.txt && python ./generateAPI.py && mv siren ../dist/siren && cd ..
       - name: Page 404
         run: |
           cp 404.html dist/404.html

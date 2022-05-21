@@ -7,5 +7,9 @@ sqlite3 of.sqlite <<'END_SQL'
 CREATE INDEX idx_complete_id ON complete (numeroDeclarationActivite);
 CREATE VIRTUAL TABLE search USING fts5 (denomination, siret, id);
 INSERT INTO search (denomination, siret, id) SELECT denomination, siretEtablissementDeclarant, numeroDeclarationActivite FROM complete;
+pragma journal_mode = delete;
+pragma page_size = 1024;
+insert into ftstable(ftstable) values ('optimize');
+vacuum;
 END_SQL
 mv of.sqlite ../public/db/of.sqlite

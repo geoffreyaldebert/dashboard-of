@@ -1,4 +1,4 @@
-wget https://www.data.gouv.fr/fr/datasets/r/ac59a0f5-fa83-4b82-bf12-3c5806d4f19f
+wget --no-check-certificate https://www.data.gouv.fr/fr/datasets/r/ac59a0f5-fa83-4b82-bf12-3c5806d4f19f
 mv ac59a0f5-fa83-4b82-bf12-3c5806d4f19f data.csv
 rm of.sqlite
 sqlite3 of.sqlite <<'END_SQL'
@@ -9,7 +9,7 @@ CREATE VIRTUAL TABLE search USING fts5 (denomination, siret, id);
 INSERT INTO search (denomination, siret, id) SELECT denomination, siretEtablissementDeclarant, numeroDeclarationActivite FROM complete;
 pragma journal_mode = delete;
 pragma page_size = 1024;
-insert into ftstable(ftstable) values ('optimize');
+insert into search(search) values ('optimize');
 vacuum;
 END_SQL
 mv of.sqlite ../public/db/of.sqlite

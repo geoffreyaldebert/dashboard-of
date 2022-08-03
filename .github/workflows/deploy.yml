@@ -33,7 +33,7 @@ jobs:
         run: sudo apt-get -q update && sudo apt-get -q install -y libsqlite3-dev
       - name: get data source
         run: |
-          cd preprocessing && wget "http://www.monactiviteformation.emploi.gouv.fr/mon-activite-formation/public/listePubliqueOF?format=csv" > data.csv
+          cd preprocessing #&& wget "http://www.monactiviteformation.emploi.gouv.fr/mon-activite-formation/public/listePubliqueOF?format=csv" > data.csv
       - name: get data and convert to sqlite
         run: |
           sudo ./preprocess.sh && cd ..

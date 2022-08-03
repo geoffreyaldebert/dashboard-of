@@ -1,4 +1,4 @@
-curl --insecure "https://www.monactiviteformation.emploi.gouv.fr/mon-activite-formation/public/listePubliqueOF?format=csv" > data.csv
+curl -k "https://www.monactiviteformation.emploi.gouv.fr/mon-activite-formation/public/listePubliqueOF?format=csv" > data.csv
 rm of.sqlite
 sqlite3 of.sqlite <<'END_SQL'
 .separator ";"

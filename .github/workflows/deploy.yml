@@ -31,9 +31,9 @@ jobs:
           npm run build
       - name: install sqlite
         run: sudo apt-get -q update && sudo apt-get -q install -y libsqlite3-dev
-      - name: get data source
-        run: |
-          cd preprocessing && sudo wget "http://www.monactiviteformation.emploi.gouv.fr/mon-activite-formation/public/listePubliqueOF?format=csv" > data.csv && cd ..
+      #- name: get data source
+      #  run: |
+      #    cd preprocessing && sudo wget "http://www.monactiviteformation.emploi.gouv.fr/mon-activite-formation/public/listePubliqueOF?format=csv" > data.csv && cd ..
       - name: get data and convert to sqlite
         run: |
           cd preprocessing && sudo ./preprocess.sh && cd ..

@@ -31,9 +31,12 @@ jobs:
           npm run build
       - name: install sqlite
         run: sudo apt-get -q update && sudo apt-get -q install -y libsqlite3-dev
+      - name: get data source
+        run: |
+          cd preprocessing && curl -k "https://www.monactiviteformation.emploi.gouv.fr/mon-activite-formation/public/listePubliqueOF?format=csv" > data.csv
       - name: get data and convert to sqlite
         run: |
-          cd preprocessing && sudo ./preprocess.sh && cd ..
+          sudo ./preprocess.sh && cd ..
       # - name: create siren folder
       #   run: |
       #     cd preprocessing && pip install -r requirements.txt && python ./generateAPI.py && cd ..

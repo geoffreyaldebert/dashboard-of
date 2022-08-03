@@ -1,4 +1,4 @@
-wget --no-check-certificate https://www.data.gouv.fr/fr/datasets/r/ac59a0f5-fa83-4b82-bf12-3c5806d4f19f
+wget --no-check-certificate "https://www.monactiviteformation.emploi.gouv.fr/mon-activite-formation/public/listePubliqueOF?format=csv"
 mv ac59a0f5-fa83-4b82-bf12-3c5806d4f19f data.csv
 rm of.sqlite
 sqlite3 of.sqlite <<'END_SQL'

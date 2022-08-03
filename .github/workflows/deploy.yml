@@ -33,10 +33,10 @@ jobs:
         run: sudo apt-get -q update && sudo apt-get -q install -y libsqlite3-dev
       - name: get data source
         run: |
-          cd preprocessing #&& wget "http://www.monactiviteformation.emploi.gouv.fr/mon-activite-formation/public/listePubliqueOF?format=csv" > data.csv
+          cd preprocessing && sudo wget "http://www.monactiviteformation.emploi.gouv.fr/mon-activite-formation/public/listePubliqueOF?format=csv" > data.csv && cd ..
       - name: get data and convert to sqlite
         run: |
-          sudo ./preprocess.sh && cd ..
+          cd preprocessing && sudo ./preprocess.sh && cd ..
       # - name: create siren folder
       #   run: |
       #     cd preprocessing && pip install -r requirements.txt && python ./generateAPI.py && cd ..
